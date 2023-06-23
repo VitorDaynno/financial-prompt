@@ -6,4 +6,4 @@
 * **expense**: Adiciona uma despesa.
 
 ## Database
-![Diagrama entidade relacionamento](/docs/er-diagram.png "Diagrama entidade relacionamento")
+![Diagrama entidade relacionamento](/docs/er-diagram.svg "Diagrama entidade relacionamento")
