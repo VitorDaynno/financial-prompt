@@ -1,4 +1,4 @@
-import { Operations } from './src/types';
+import Operations from './src/types/operations';
 import db from './src/config/database';
 import expense from './src/scripts/expense';
 import account from './src/scripts/account';
@@ -7,7 +7,7 @@ import account from './src/scripts/account';
 const operations: Operations = {
   expense: expense,
   account: account,
-}
+};
 
 const init = async () => {
   const operation = process.argv[2];
@@ -20,6 +20,6 @@ const init = async () => {
   }
 
   await operations[operation]();
-}
+};
 
 init();
