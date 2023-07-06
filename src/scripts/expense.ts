@@ -10,6 +10,7 @@ import * as numberHelper from '../helpers/number';
 import * as dateHelper from '../helpers/date';
 import { dateInput } from '../prompts/dateInput';
 import { textInput } from '../prompts/textInput';
+import { numbertInput } from '../prompts/numberInput';
 import Account from '../types/account';
 
 
@@ -66,7 +67,7 @@ const getDataByTerminal = async (
     { required: true, maxLength: 20 }
   );
 
-  const value = await textInput('Valor da despesa: R$', { required: true });
+  const value = await numbertInput('Valor da despesa: R$', { required: true });
 
   const date = await dateInput('Data da despesa:');
 
