@@ -1,6 +1,6 @@
-import { PaymentMethods } from '../enums/paymentMethods'
+import { PaymentMethods } from '../enums/paymentMethods';
 
-export const paymentMethods = [
+export const expensePaymentMethods = [
   {
     name: 'Crédito',
     value: PaymentMethods.Credit
@@ -12,6 +12,21 @@ export const paymentMethods = [
   {
     name: 'Débito',
     value: PaymentMethods.Debit
+  },
+  {
+    name: 'Dinheiro',
+    value: PaymentMethods.Cash
+  },
+  {
+    name: 'Transferência',
+    value: PaymentMethods.Transfer
+  }
+];
+
+export const revenuePaymentMethods = [
+  {
+    name: 'Pix',
+    value: PaymentMethods.Pix
   },
   {
     name: 'Dinheiro',

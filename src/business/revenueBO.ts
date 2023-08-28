@@ -1,12 +1,12 @@
-import ExpenseDAO from '../daos/expenseDAO';
+import RevenueDAO from '../daos/revenueDAO';
 import Expense from '../types/expense';
 import CreateExpense from '../types/createExpense';
 
 
-class ExpenseBO {
+class RevenueBO {
   private dao;
 
-  constructor(dao: ExpenseDAO ) {
+  constructor(dao: RevenueDAO) {
     this.dao = dao;
   }
 
@@ -33,4 +33,4 @@ class ExpenseBO {
   }
 }
 
-export default ExpenseBO;
+export default RevenueBO;
