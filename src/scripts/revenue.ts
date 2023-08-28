@@ -1,22 +1,22 @@
-import { select } from '@inquirer/prompts';
 import chalk from 'chalk';
+import { select } from '@inquirer/prompts';
 
 import AccountBO from '../business/accountBO';
-import ExpenseBO from '../business/expenseBO';
-import { expensePaymentMethods } from '../constants/paymentMethods';
+import RevenueBO from '../business/revenueBO';
+import { revenuePaymentMethods } from '../constants/paymentMethods';
 import { PaymentMethods } from '../enums/paymentMethods';
 import NumberTypes from '../enums/numberTypes';
 import * as factoryBO from '../factories/factoryBO';
-import * as numberHelper from '../helpers/number';
 import * as dateHelper from '../helpers/date';
+import * as numberHelper from '../helpers/number';
 import { dateInput } from '../prompts/dateInput';
-import { textInput } from '../prompts/textInput';
 import { numbertInput } from '../prompts/numberInput';
+import { textInput } from '../prompts/textInput';
 import Account from '../types/account';
 
 
-const expense = async (): Promise<void> => {
-  const expenseBO: ExpenseBO = factoryBO.getExpenseBO();
+const revenue = async (): Promise<void> => {
+  const revenueBO: RevenueBO = factoryBO.getRevenueBO();
 
   const accounts: Account[] = await getAccounts();
   const methods = await getPaymentMethods(accounts);
@@ -40,7 +40,7 @@ const expense = async (): Promise<void> => {
     note,
   } = await getDataByTerminal(methods, accounts);
 
-  await expenseBO.create({
+  await revenueBO.create({
     description,
     amount: numberHelper.stringToNumber(value) * 100,
     date: dateHelper.toDate(date, 'dd/MM/yyyy'),
@@ -59,22 +59,38 @@ const getAccounts = async (): Promise<Account[]> => {
   return accounts;
 };
 
+const getPaymentMethods = async (accounts: Account[]) => {
+  const enabledMethods = new Set();
+
+  accounts.forEach((account) => {
+    const { enabled_payment_methods: enabledPaymentMethods } = account;
+
+    enabledPaymentMethods.forEach((paymentMethod) =>
+      enabledMethods.add(paymentMethod)
+    );
+  });
+
+  return revenuePaymentMethods.filter(
+    (revenuePaymentMethod) => enabledMethods.has(revenuePaymentMethod.value)
+  );
+};
+
 const getDataByTerminal = async (
-  methods: {name: string, value: PaymentMethods}[],
+  methods: { name: string, value: PaymentMethods }[],
   accounts: Account[]
 ) => {
   const description = await textInput(
-    'Descrição da despesa:',
+    'Descrição da receita:',
     { required: true, maxLength: 20 }
   );
 
   const value = await numbertInput(
-    'Valor da despesa: R$',
+    'Valor da receita: R$',
     { required: true },
     NumberTypes.Float
   );
 
-  const date = await dateInput('Data da despesa:');
+  const date = await dateInput('Data da receita:');
 
   const paymentMethod = await select({
     message: 'Selecione a forma de pagamento:',
@@ -83,7 +99,7 @@ const getDataByTerminal = async (
 
   const enabledAccounts = await filterAccounts(paymentMethod, accounts);
   const account = await select({
-    message: 'Selecione a conta utilizada:',
+    message: 'Selecione a conta de destino:',
     choices: parseToChoices(enabledAccounts)
   });
 
@@ -108,33 +124,6 @@ const getDataByTerminal = async (
   };
 };
 
-const getPaymentMethods = async (accounts: Account[]) => {
-  const enabledMethods = new Set();
-
-  accounts.forEach((account) => {
-    const { enabled_payment_methods: enabledPaymentMethods } = account;
-
-    enabledPaymentMethods.forEach((paymentMethod) =>
-      enabledMethods.add(paymentMethod)
-    );
-  });
-
-  return expensePaymentMethods.filter(
-    (expensePaymentMethod) => enabledMethods.has(expensePaymentMethod.value)
-  );
-};
-
-const filterAccounts = async (
-  paymentMethod: PaymentMethods,
-  accounts: Account[]
-): Promise<Account[]> => {
-  const enabledAccounts = accounts.filter(({ enabled_payment_methods }) =>
-    enabled_payment_methods.includes(paymentMethod)
-  );
-
-  return enabledAccounts;
-};
-
 const parseToChoices = (accounts: Account[]) => {
   const choices = accounts.map((account: Account)=> {
     const { id, name } = account;
@@ -148,4 +137,15 @@ const parseToChoices = (accounts: Account[]) => {
   return choices;
 };
 
-export default expense;
+const filterAccounts = async (
+  paymentMethod: PaymentMethods,
+  accounts: Account[]
+): Promise<Account[]> => {
+  const enabledAccounts = accounts.filter(({ enabled_payment_methods }) =>
+    enabled_payment_methods.includes(paymentMethod)
+  );
+
+  return enabledAccounts;
+};
+
+export default revenue;

@@ -37,7 +37,7 @@ const getDataByTerminal = async () => {
   const value = await textInput('Valor inicial da conta: R$', { required: true, maxLength: 20 });
 
   const enabledPaymentMethods = await checkbox({
-    message: 'Metodos habilitados:',
+    message: 'Métodos habilitados:',
     choices: getEnabledPaymentMethods()
   });
 
@@ -53,6 +53,10 @@ const getAccountTypes = () => {
     {
       name: 'Conta poupança',
       value: AccountTypes.Saving
+    },
+    {
+      name: 'Física',
+      value: AccountTypes.Physical
     }
   ];
 

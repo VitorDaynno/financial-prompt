@@ -1,5 +1,5 @@
-import Expense from '../types/expense';
 import ExpenseModel from '../models/expense';
+import Expense from '../types/expense';
 
 
 class ExpenseDAO {
