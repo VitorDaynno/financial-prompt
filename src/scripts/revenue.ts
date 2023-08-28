@@ -15,7 +15,6 @@ import { textInput } from '../prompts/textInput';
 import Account from '../types/account';
 
 
-
 const revenue = async (): Promise<void> => {
   const revenueBO: RevenueBO = factoryBO.getRevenueBO();
 

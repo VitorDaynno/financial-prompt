@@ -30,7 +30,7 @@ const getDataByTerminal = async () => {
   );
 
   const dueDate = await numbertInput(
-    'Dia do pagamento:',
+    'Dia do vencimento:',
     { required: true, maxLength: 2 },
     NumberTypes.Integer
   );
