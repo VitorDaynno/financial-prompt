@@ -35,6 +35,10 @@ const Revenue = db.define('revenues', {
     type: Sequelize.STRING(20),
     allowNull: false
   },
+  is_paid: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false
+  },
   note: {
     type: Sequelize.STRING(100),
     allowNull: true

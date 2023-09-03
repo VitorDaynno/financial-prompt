@@ -1,7 +1,7 @@
 import { PaymentMethods } from '../enums/paymentMethods';
 
 
-type CreateExpense = {
+type CreateRevenue = {
   description: string;
   amount: number;
   date: Date,
@@ -12,4 +12,4 @@ type CreateExpense = {
   note?: string,
 }
 
-export default CreateExpense;
+export default CreateRevenue;

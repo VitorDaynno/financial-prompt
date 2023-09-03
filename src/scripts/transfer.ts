@@ -120,6 +120,7 @@ const createTransfer = async (
     paymentMethod: PaymentMethods.Transfer,
     accountId: originAccount,
     category: 'Transferência',
+    isPaid: true,
     note
   });
 
@@ -130,6 +131,7 @@ const createTransfer = async (
     paymentMethod: PaymentMethods.Transfer,
     accountId: destinyAccount,
     category: 'Transferência',
+    isPaid: true,
     note
   });
 };

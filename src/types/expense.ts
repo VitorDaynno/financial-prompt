@@ -9,6 +9,7 @@ type Expense = {
   payment_method: PaymentMethods,
   account_id: number,
   category: string,
+  is_paid: boolean,
   note?: string,
 }
 

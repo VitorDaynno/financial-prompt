@@ -1,6 +1,6 @@
 import RevenueDAO from '../daos/revenueDAO';
-import Expense from '../types/expense';
-import CreateExpense from '../types/createExpense';
+import Revenue from '../types/revenue';
+import CreateRevenue from '../types/createRevenue';
 
 
 class RevenueBO {
@@ -10,7 +10,7 @@ class RevenueBO {
     this.dao = dao;
   }
 
-  async create(expense: CreateExpense) {
+  async create(expense: CreateRevenue) {
     const {
       description,
       amount,
@@ -18,6 +18,7 @@ class RevenueBO {
       paymentMethod,
       accountId,
       category,
+      isPaid,
       note
     } = expense;
 
@@ -28,8 +29,9 @@ class RevenueBO {
       payment_method: paymentMethod,
       account_id: accountId,
       category,
+      is_paid: isPaid,
       note
-    } as Expense);
+    } as Revenue);
   }
 }
 

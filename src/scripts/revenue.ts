@@ -10,6 +10,7 @@ import * as factoryBO from '../factories/factoryBO';
 import * as dateHelper from '../helpers/date';
 import * as numberHelper from '../helpers/number';
 import { dateInput } from '../prompts/dateInput';
+import { confirmInput } from '../prompts/confirmInput';
 import { numbertInput } from '../prompts/numberInput';
 import { textInput } from '../prompts/textInput';
 import Account from '../types/account';
@@ -37,6 +38,7 @@ const revenue = async (): Promise<void> => {
     paymentMethod,
     account,
     category,
+    isPaid,
     note,
   } = await getDataByTerminal(methods, accounts);
 
@@ -47,6 +49,7 @@ const revenue = async (): Promise<void> => {
     paymentMethod,
     accountId: account,
     category,
+    isPaid,
     note
   });
 };
@@ -108,6 +111,8 @@ const getDataByTerminal = async (
     { required: true, maxLength: 20}
   );
 
+  const isPaid = await confirmInput('Paga?');
+
   const note = await textInput(
     'Observação:',
     { required: false, maxLength: 100 }
@@ -120,6 +125,7 @@ const getDataByTerminal = async (
     paymentMethod,
     account,
     category,
+    isPaid,
     note,
   };
 };
