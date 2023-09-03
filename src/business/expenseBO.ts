@@ -18,6 +18,7 @@ class ExpenseBO {
       paymentMethod,
       accountId,
       category,
+      isPaid,
       note
     } = expense;
 
@@ -28,6 +29,7 @@ class ExpenseBO {
       payment_method: paymentMethod,
       account_id: accountId,
       category,
+      is_paid: isPaid,
       note
     } as Expense);
   }

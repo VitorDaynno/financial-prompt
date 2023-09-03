@@ -138,6 +138,7 @@ class BillBO {
       category: 'Fatura',
       date,
       description: `Pagamento da fatura ${creditCard?.name}`,
+      isPaid: true,
       paymentMethod
     });
   }
