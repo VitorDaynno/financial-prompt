@@ -68,7 +68,7 @@ const getDataByTerminal = async (
 ) => {
   const description = await textInput(
     'Descrição da despesa:',
-    { required: true, maxLength: 20 }
+    { required: true, maxLength: 40 }
   );
 
   const value = await numbertInput(
