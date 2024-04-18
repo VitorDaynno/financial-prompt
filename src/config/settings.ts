@@ -16,7 +16,7 @@ const getEnviroment = (name: string) => {
     console.error(`An error occurred: ${error}`);
     process.exit();
   }
-}
+};
 
 export const database = {
   host: getEnviroment('DATABASE_HOST'),

@@ -87,7 +87,7 @@ class BillBO {
   async updateBillAmount(id: number, valueToIncrease: number): Promise<void> {
     const bill = await this.getById(id);
 
-    this.dao.update(id, {
+    await this.dao.update(id, {
       amount: bill.amount + valueToIncrease
     });
   }
