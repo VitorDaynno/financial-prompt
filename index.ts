@@ -30,6 +30,8 @@ const init = async () => {
   }
 
   await operations[operation]();
+
+  await db.close();
 };
 
 init();
